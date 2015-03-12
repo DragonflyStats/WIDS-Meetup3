@@ -1,0 +1,12 @@
+
+\frametitle{Add new columns with \texttt{mutate()} }
+\texttt{mutate} allows you to refer to columns that you just created:
+
+\begin{verbatim}
+iris3 =  mutate(iris,
+PW2 = log(Petal.Width),
+PL2=sqrt(Petal.Length),
+Ratio=PL2/PW2 )
+
+head(iris3)
+\end{verbatim}

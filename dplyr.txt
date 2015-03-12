@@ -1,0 +1,11 @@
+Rownames
+
+I don’t think using row names is a good idea because it violates one of the principles 
+of tidy data: every variable should be stored in the same way.
+
+view
+dplyr will never print more than 20 rows of data (previously it was 100). 
+The best way to see more rows of data is to use View().
+
+BINDING ROWS AND COLUMNS
+dplyr now provides bind_rows() and bind_cols() for binding data frames together. Compared to rbind() and cbind(), the functions:
