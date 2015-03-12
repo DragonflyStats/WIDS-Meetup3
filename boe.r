@@ -1,0 +1,10 @@
+getwd()
+BOEdata <- read.csv("nmgonline2013.csv",header=T,stringsasFactors=T)
+BOEdata <- read.csv("nmgonline2013.csv",header=T,stringsAsFactors=T)
+dim(BOEdata)
+library(dplyr)
+utils:::menuInstallPkgs()
+library(dplyr)
+glimpse(BOEdata)
+history()
+
