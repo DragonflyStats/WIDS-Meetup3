@@ -1,4 +1,4 @@
-BXC-MethComp
+West of Ireland Data Science Meetup 3
 ============
-
-Carstensen's Approachs to MCS
+ - dplyr
+ - Bank of England Housing Data
