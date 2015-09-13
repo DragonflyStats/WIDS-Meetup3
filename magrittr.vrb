@@ -1,0 +1,14 @@
+\frametitle{magrittr :  the $\%>\%$ operator}
+\Large
+\begin{framed}
+\begin{verbatim}
+mtcars %>%
+   subset(cyl == 6, c(mpg, wt)) %>%
+      summary(digits=2)
+\end{verbatim}
+\end{framed}
+\begin{itemize}
+\item Get the mtcars data set
+\item \textbf{Then} subset it like this
+\item \textbf{Then} get the summary, with this setting
+\end{itemize}
