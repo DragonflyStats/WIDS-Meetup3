@@ -1,0 +1,441 @@
+\documentclass{article}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{framed}
+\usepackage{multicol}
+\usepackage{subfiles}
+\voffset=-1.5cm
+\oddsidemargin=0.0cm
+\textwidth = 490pt
+
+\begin{document}
+	
+	
+\subsection*{Exercise 1 : Installing Packages}
+
+\begin{enumerate}
+\item Install the tidyverse packages.
+\item Install the magrittr packages.
+\item load these pacakges using the \texttt{library(}) function.
+\end{enumerate}
+
+
+\begin{framed}
+\begin{verbatim}
+library(magrittr)
+\end{verbatim}
+\end{framed}
+
+%================================================%
+\subsection*{Exercise 2 : Check Your Working Directory}
+
+
+\begin{enumerate}
+\item Using the \texttt{getwd()} command, check your working directory.
+\item Using the \texttt{setwd()} function, change the working directory to a different path \\ (just using "desktop" or "my documents").
+\item Using the \texttt{getwd()} command, Change the working directory back to the original location.
+\end{enumerate}
+
+Remark: Be careful with forward slashes and backslashes.
+
+\smallskip
+
+
+%================================================%
+\subsection*{Exercise 3 : Load the Idaho CSV file}
+
+\textbf{\textit{Prelimaries:}} 
+\begin{itemize}
+\item Put the idaho CSV file in your working directory.
+\item We are going to use "\texttt{read\_csv()}" from the readr tidverse package. This is not the same as "\texttt{read.csv()}", a base R function.
+\item Let's make sure that the CSV file is in the working directory. Run the following bit of code to find out.
+\end{itemize}
+
+\begin{framed}
+\begin{verbatim}
+list.files()
+\end{verbatim}
+\end{framed}
+
+
+\noindent \textbf{\textit{Exercise:}}
+
+\begin{enumerate}
+\item Using the \texttt{read\_csv()}, load the Idaho CSV file into the R environment, saving it as "idaho".
+\end{enumerate}
+
+
+
+\smallskip
+\textbf{As an aside:}\\
+
+Is \texttt{read\_csv()} faster than \texttt{read.csv()}? Use the following code to find out.
+
+\begin{framed}
+\begin{verbatim}
+# Test 1
+T1 <- Sys.time() ; idaho <- read.csv("idaho.csv") ; Sys.time() - T1
+
+# Test 2
+T2 <- Sys.time() ; idaho <- read_csv("idaho.csv") ; Sys.time() - T2
+\end{verbatim}
+\end{framed}
+
+%================================================%
+
+\subsection*{Exercise 4 : Inspect the Dataset}
+
+\begin{framed}
+\begin{verbatim}
+summary(idaho)
+\end{verbatim}
+\end{framed}
+
+\begin{enumerate}
+\item Try out the following commands, using the previous  block of code as an example, and try guess what they do.
+\end{enumerate}
+
+\begin{multicols}{3}
+\begin{itemize}
+\item dim()
+\item nrow()
+\item ncol()
+\item names()
+\item tail()
+\item head()
+\end{itemize}
+\end{multicols}
+
+The following command can tell how the data is stored in memory, and how it is structured.
+
+\begin{multicols}{2}
+\begin{itemize}
+\item \texttt{class()} [\textit{Base R}]
+\item \texttt{mode()}  [\textit{Base R}]
+\item \texttt{str()}   [\textit{Base R}]
+\item \texttt{glimpse()} [\textit{dplyr}]
+\end{itemize}
+\end{multicols}
+
+%================================================%
+
+\subsection*{Exercise 5 : Inspect the Dataset (using Pipe Operator)}
+
+Repeat Exercise 4, but this time use the pipe operator.
+(You should have the magrittr R package loaded.)
+
+\begin{framed}
+\begin{verbatim}
+idaho %>% summary
+
+idaho %>% tail       # Default: Last 6
+
+idaho %>% tail(10)   # Use last 10
+\end{verbatim}
+\end{framed}
+
+%================================================%
+
+\subsection*{Exercise 6 : Inspect A Specific Column}
+
+In this exercise, we will inspect the "BDS" column. This variable contains information on the number of bedrooms in each premises.
+To access this column, we use daho$\$$BDS. 
+
+\begin{framed}
+\begin{description}
+\item[idaho] is a data frame, made up of multiple columns.
+\item[idaho$\$$BDS] refers specifically to the BDS column in the idaho data frame.
+\end{description}
+\end{framed}
+
+\textbf{Exercise:}
+\begin{enumerate}
+\item Try out the commands from the last exercises on the BDS column.
+\end{enumerate}
+
+
+
+%================================================%
+
+
+\subsection*{Exercise 7 : Create A Frequency Table}
+
+The table() function is used to create a simple frequency table.
+\begin{framed}
+\begin{verbatim}
+idaho$BDS %>% table
+
+# or
+
+table(idaho$BDS)
+\end{verbatim}
+\end{framed}
+
+Remark: table() is really useful in detecting anomalous output.
+
+\texttt{exercise}
+\begin{itemize}
+\item Create frequency tabl
+\end{itemize}
+
+%================================================%
+
+\subsection*{Exercise 8 : Create Cross Tabulations}
+
+If given two valid inputs, rather than one, the \texttt{table()} command would create a cross-tabulation of both variables.
+
+\begin{itemize}
+\item This analysis is only useful if both variables are categorical variables. It would work with other types of variables, but the output would be useless for any meaningful analysis.
+\end{itemize}
+
+
+%================================================%
+
+\subsection*{Exercise 9 : Compute Summary Statistics}
+
+This variable contains information on the number of bedrooms in each premises.
+
+
+\begin{multicols}{3}
+\begin{itemize}
+\item mean()
+\item media()
+\item \texttt{sd()}
+\item \texttt{var()}
+\item \texttt{IDQ()}
+\item \texttt{mad()}
+\end{itemize}
+\end{multicols}
+
+Exercise:
+\begin{enumerate}
+\item Try out the commands from the last exercises on the BDS column.
+\end{enumerate}
+
+What do these functions do? What Statistical Result do they give us? To find out, we can use the help files.
+
+\begin{framed}
+\begin{verbatim}
+help(mad)
+
+#or
+
+?mad
+\end{verbatim}
+\end{framed}
+
+
+%================================================%
+
+\subsection*{Exercise 10 : Compute Summary Statistics, in presence of Missing Data}
+
+For this exercise, we will use the OCPIP column. If you were to use the following code segment, you would see that there is lots of missing data.
+\begin{framed}
+\begin{verbatim}
+summary(idaho$OCPIP)
+
+# or 
+
+idaho$OCPIP  %>% summary
+\end{verbatim}
+\end{framed}
+
+\begin{framed}
+\begin{verbatim}
+ %>% mean(na.rm = TRUE)
+
+# or
+
+mean(   ,na.rm = TRUE)
+\end{verbatim}
+\end{framed}
+
+%================================================%
+\newpage
+\subsection*{Exercise 11 : Selecting columns using select}
+
+In this exercise, we are going to use the dplyr R package. 
+
+We will use the select function to pick out certain columns, based on specific condition. Try out the following lines of code. Use head() and tail() to properly assess the output.
+
+\begin{framed}
+\begin{verbatim}
+#First 4 Columns
+temp1 <- select(idaho,1:4)
+idaho %>% select(1:4) -> temp1
+
+#All columns up to BDS
+temp2 <- select(idaho,1:BDS)
+idaho %>% select(1:BDS) -> temp2
+
+#All columns that start with "wg")
+temp3 <- select(idaho,starts_with("wg"))
+idaho %>% select(starts_with("wg")) -> temp3
+
+# Remark : is this case-sensitive? R usually is, but maybe not here.
+
+\end{verbatim}
+\end{framed}
+
+\noindent \textit{Remark : In general, it is advised to avoid creating new objects (i.e. temporary dataframes like we used above), also it is advised to delete them as soon as they are no longer needed.}
+
+\begin{framed}
+\begin{verbatim}
+rm(temp1); rm(temp2);
+\end{verbatim}
+\end{framed}
+
+
+%================================================%
+
+\subsection*{Exercise 12 : Using summarize operation}
+
+
+\begin{framed}
+\begin{verbatim}
+idaho %>% summarise(mean(OCPIP))  # Wont Work in this case!
+
+idaho %>% summarise(mean(OCPIP,na.rm=TRUE))
+
+idaho %>% summarise(meanOP = mean(OCPIP,na.rm=TRUE))
+\end{verbatim}
+\end{framed}
+
+
+%================================================%
+
+\subsection*{Exercise 13 : Using group\_by operation}
+
+There are three Types of premises, as listed in the ``Type" Column.
+
+\begin{framed}
+\begin{verbatim}
+table(idaho$TYPE)   
+
+# or
+idaho$TYPE %>% table
+\end{verbatim}
+\end{framed}
+
+This functions restructures the data.
+
+\begin{framed}
+\begin{verbatim}
+iris %>% head(3)
+iris %>% slice(1:3)
+
+
+idaho %>% group_by(TYPE) %>% slice(1:3)
+\end{verbatim}
+\end{framed}
+%================================================%
+
+\begin{framed}
+\begin{verbatim}
+
+idaho %>% group_by(TYPE) %>% summarise(mean(OCPIP,na.rm=TRUE))
+
+idaho %>% group_by(TYPE) %>% summarise(meanOP = mean(OCPIP,na.rm=TRUE))
+\end{verbatim}
+\end{framed}
+
+%================================================%
+
+\subsection*{Exercise 14 : Code Vocabulary (Part 1)}
+
+\subsubsection*{Part A: Relational Operators}
+
+\begin{framed}
+\begin{multicols}{3}
+\begin{itemize}
+	\item \texttt{==} Equal to
+	\item \texttt{!=} Not Equal
+	\item \texttt{$<$} Less than
+	\item \texttt{$<=$} Less than or equal to
+	\item \texttt{$>$} Greater than
+	\item \texttt{$>=$} Greater than or equal to
+\end{itemize}
+\end{multicols}
+\end{framed}
+	
+\subsubsection*{Part B: Splicing}
+
+\begin{framed}
+\begin{verbatim}
+X <- c(1,2,5,4,6,4,12,15,10)
+
+# Subset X to elements great than 10
+X[X>10]
+
+# Subset X to elements less than or equal to 5
+
+
+X[X<=5]
+\end{verbatim}
+\end{framed}
+
+
+%================================================%
+
+\subsection*{Exercise 15 : Filter Operations}
+
+%================================================%
+
+\subsection*{Exercise 16 : Code Vocabulary (Part 2)}
+\subsubsection*{Part A: Creating a Dataframe}
+
+\begin{framed}
+\begin{verbatim}
+Z <- c(1,2,5,4,NA,0,1,6,7,16)
+myDF <- data.frame(Y,Z)
+
+\end{verbatim}
+\end{framed}
+
+\subsubsection*{Part B: Using \texttt{is.na()}}
+
+\begin{framed}
+\begin{verbatim}
+Y <- c(1,2,5,4,NA,,1,6,7,16)
+
+\end{verbatim}
+\end{framed}
+
+
+\subsubsection*{Part C: Using \texttt{complete.cases()}}
+
+\newpage
+
+
+
+The American Community Survey distributes downloadable data about United States communities. 
+
+Download the 2006 microdata survey about housing for the state of Idaho.
+
+
+\textit{Question 1 will refer to a variable that is described on Page 11. Question 2 will refer to a variable on Page 12, and so on.}
+
+\begin{enumerate}
+	\item Estimate the median amount of property taxes paid.
+	\item What proportion of family households have no income in the house?
+	\item What proportion of family households have Food stamp amount (yearly amount) allocation
+	\item What proportion of premises have complete kitchen facilities on the property?
+	\item 
+\end{enumerate}
+%=================================================================%
+
+% VAL
+
+How many housing units in this survey were worth more than \$1,000,000?
+
+159
+164
+53
+24
+
+
+% length(idaho_housing$VAL[!is.na(idaho_housing$VAL) & idaho_housing$VAL==24])
+
+%==================================================================%
+
+\end{document}
