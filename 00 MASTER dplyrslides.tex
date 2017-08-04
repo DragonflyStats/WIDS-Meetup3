@@ -144,56 +144,92 @@ There are four basic principles for Tidyverse programming:
 \end{frame}
 %=================================================%
 \begin{frame}[fragile]
-	\frametitle{ The $\%>\%$ operator}
-	\LARGE
+\frametitle{magrittr: The Pipe Operator}
+\Large
+	\vspace{-1cm}
 	% - http://r2014-mtp.sciencesconf.org/file/92631
-	\begin{itemize}
-		\item From \textbf{magrittr} package. 
-		\item Used extensively in \textbf{dplyr}.
-		\item $\%>\%$ is a piping operator, and can be verbalised as ``\textit{then}".
-		\item It takes the output of the left side, and uses it as the first
-		argument of the function on the right side.
-	\end{itemize}
-\end{frame}
-%================================================================= %
-\begin{frame}[fragile]
-	\frametitle{magrittr :  the $\%>\%$ operator}
-	\Large
-	\begin{framed}
-		\begin{verbatim}
-		subset(mtcars, cyl == 6, c(mpg, wt))
+\begin{itemize}
+		\item From \textbf{magrittr} package.  \smallskip
+		\item Used extensively in the \textbf{tidyverse}. \smallskip
+		\item \texttt{$\%>\%$} is a piping operator that takes the output of the left side, and uses it as the first argument of the function on the right side.
 		
-		mtcars %>% subset(cyl == 6, c(mpg, wt))
-		\end{verbatim}
-	\end{framed}
+\end{itemize}
 \end{frame}
+%==================================================================%
+
 \begin{frame}
-	\begin{figure}
-		\centering
-		\includegraphics[width=0.99\linewidth]{images/magrittrcode01}
-	\end{figure}
+\frametitle{magrittr: The Pipe Operator}
+\begin{figure}
+\centering
+\includegraphics[width=0.99\linewidth]{images/myTailSummary}
+\end{figure}
+
+\end{frame}
+%==================================================================%
+\begin{frame}[fragile]
+\frametitle{magrittr: The Pipe Operator}
+\large	
+\vspace{-0.9cm}
+\begin{framed}
+	\begin{verbatim}
+	iris %>% tail %>% summary -> myTailSummary
+	\end{verbatim}
+\end{framed}
+{
+\begin{itemize}
+	\item We take the \textbf{\textit{iris}} dataframe, 
+	\item then get the last six rows (i.e. using the \textbf{\textit{tail}} function), 
+	\item then get the \textbf{\textit{summary}} of that,
+	\item then save this output aas ``\textbf{\textit{myTailSummary}}".
+\end{itemize}
+
+}
 \end{frame}
 %================================================================= %
 \begin{frame}[fragile]
-	\frametitle{magrittr :  the $\%>\%$ operator}
-	\Large
-	\begin{framed}
-		\begin{verbatim}
+\frametitle{magrittr: The Pipe Operator}
+\large	
+\vspace{-0.9cm}
+\textbf{Using Additional Arguments In Functions}
+\begin{framed}
+\begin{verbatim}
+iris %>% tail(10)
 		
-		summary(subset(mtcars, cyl == 6, 
-		c(mpg, wt)), digits=2)
-		
-		mtcars %>% 
-		subset(cyl == 6, c(mpg, wt)) %>% 
-		summary(digits=2)
-		\end{verbatim}
-	\end{framed}
-	
+mtcars %>% subset(cyl == 6, c(mpg, wt))
+\end{verbatim}
+\end{framed}
 \end{frame}
 %================================================================= %
+\begin{frame}
+\frametitle{magrittr: The Pipe Operator}
+\large
+\begin{figure}
+\centering
+\includegraphics[width=0.99\linewidth]{images/magrittrcode01}
+\end{figure}
+\end{frame}
+%================================================================= %
+%\begin{frame}[fragile]
+%\frametitle{magrittr: The Pipe Operator}
+%\large
+%\begin{framed}
+%\begin{verbatim}
+%		
+%		summary(subset(mtcars, cyl == 6, 
+%		c(mpg, wt)), digits=2)
+%		
+%		mtcars %>% 
+%		subset(cyl == 6, c(mpg, wt)) %>% 
+%		summary(digits=2)
+%\end{verbatim}
+%\end{framed}
+%	
+%\end{frame}
+%%================================================================= %
 \begin{frame}[fragile]
-	\frametitle{magrittr :  the $\%>\%$ operator}
-	\Large
+\frametitle{magrittr: The Pipe Operator}
+\large
+Another Example
 	\begin{framed}
 		\begin{verbatim}	
 		mtcars %>% 
@@ -207,16 +243,18 @@ There are four basic principles for Tidyverse programming:
 		\item \textbf{Then} get the summary, with this setting
 	\end{itemize}
 \end{frame}
-
+%%================================================================= %
 \begin{frame}
-	\begin{figure}
-		\centering
-		\includegraphics[width=0.99\linewidth]{images/magrittrcode02}
-		
-	\end{figure}
-	
-\end{frame}
+\frametitle{magrittr: The Pipe Operator}
+\large	
+\begin{figure}
+\centering
+\includegraphics[width=0.99\linewidth]{images/magrittrcode02}
 
+\end{figure}
+\textit{(Remark: indentation not required, just makes it easier to read)}
+\end{frame}
+%%================================================================= %
 %================================================================= %
 %\begin{frame}
 %	\frametitle{magrittr :  the $\%>\%$ operator}
@@ -869,17 +907,20 @@ As well as selecting from the set of existing columns, it’s often useful to ad
 	\end{figure}
 	
 \end{frame}
-
-\section{Multiple table verbs}
+%=====================================================%
+\section{dplyr: Multiple table verbs}
 
 %% Graphic irismutate2
 \begin{frame}
-	\frametitle{Multiple table verbs}
-	
+	\frametitle{dplyr: Multiple Table Verbs}
+	\large
 	As well as verbs that work on a single \texttt{tbl}, there are also a set of useful verbs that work with two \texttt{tbl}s at a time: joins and set operations.
 \end{frame}
+%=====================================================%
+
 \begin{frame}
-	\frametitle{Joins}
+	\frametitle{dplyr: Joins}
+	\large
 	dplyr implements the four most useful joins from SQL:
 	
 	\begin{itemize}
@@ -889,6 +930,8 @@ As well as selecting from the set of existing columns, it’s often useful to ad
 		\item \texttt{anti\_join(x, y)}: all x without match in y
 	\end{itemize}
 \end{frame}
+%=====================================================%
+
 \begin{frame}
 	\begin{figure}
 		\centering
