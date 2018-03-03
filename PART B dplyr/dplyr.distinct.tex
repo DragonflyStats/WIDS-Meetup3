@@ -1,0 +1,68 @@
+
+%---------------------------------------%
+\subsection{\texttt{n_distinct}}
+
+Efficiently count the number of unique values in a vector.
+
+
+Package:  dplyr
+Version:  0.1.1
+
+%---------------------------------------%
+\subsection{Description}
+This is a faster and more concise equivalent of length(unique(x))
+
+
+\begin{description}
+\item[Usage:] n_distinct(x)
+
+\item[Arguments:] x a vector of values
+\end{description}
+%---------------------------------------%
+\subsection{Examples}
+
+x <- sample(1:10, 1e5, rep = TRUE)
+length(unique(x))
+n_distinct(x)
+
+
+In dplyr 0.3 this can be easily achieved using the distinct() method. Here is an example:
+
+
+distinct_df = df %>% distinct(field1)
+Then you can get a vector of the distinct values using: 
+distinct_vector = distinct_df$field1
+
+It can be cleaner to also select only the column you are interested in at the same time as you perform the distinct() call, like so:
+
+
+distinct_df = df %>% distinct(field1) %>% select(field1)
+distinct_vector = distinct_df$field1
+
+
+%---------------------------------------%
+\subsection{\texttt{n_distinct}}
+
+Efficiently count the number of unique values in a vector.
+
+
+Package:  dplyr
+Version:  0.1.1
+
+%---------------------------------------%
+\subsection{Description}
+This is a faster and more concise equivalent of length(unique(x))
+
+
+\begin{description}
+\item[Usage:] n_distinct(x)
+
+\item[Arguments:] x a vector of values
+\end{description}
+%---------------------------------------%
+\subsection{Examples}
+
+x <- sample(1:10, 1e5, rep = TRUE)
+length(unique(x))
+n_distinct(x)
+

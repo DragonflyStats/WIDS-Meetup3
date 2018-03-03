@@ -1,0 +1,76 @@
+
+%==============================================================%
+
+\begin{framed}
+\begin{verbatim}
+
+df1 <- data.frame( key1 = c("A","B","C","D") , 
+                   var1 = 1:4 , 
+                   var2 = "Cork","Sligo","Clare"," Kerry " )
+df2 <- data.frame( key1 = c("B","C","D","E") , 
+                   var1 = 2:5 , 
+                   var3 = c("Oscar","LouLou","Charlie","Sally") )
+
+\end{verbatim}
+\end{framed}
+
+%===============================================================%
+
+\subsection{joins in dplyr}
+
+\begin{itemize}
+\item \texttt{left_join} 
+\item \texttt{right_join}
+\item \texttt{join}
+% \item \texttt{ }
+\end{itemize}
+
+%===============================================================%
+
+% dplyr
+
+\texttt{distinct()}  and \texttt{n_distinct()}
+
+\begin{itemize}
+\item \texttt{distinct()}  
+\item \texttt{n\_distinct()}
+\end{itemize}
+
+
+%===============================================================%
+
+\texttt{transmute()} is very similar to \texttt{mutate()}, 
+but with only the newly created variables being kept.
+
+We will use conventional \texttt{R} programming, but we will show how the $\%\;\>\;\%$ 
+operator can be used to do the same operations.
+
+We will concentrate on the variables
+\begin{itemize}
+\item \texttt{tz}  - Time Zone
+\item \texttt{alt} - Altitude
+\end{itemize}
+
+%================================================================%
+\subsection*{Exercises}
+\begin{item}
+\item Determine the summary for Airports in timezone 5 only
+\item Find the highest airport in each timezone
+\item Find the three highest airports in each timezone
+\end{itemize}
+
+\begin{framed}
+\begin{verbatim}
+
+ap1 <- group_by(airports,tz)
+ap2 <- arrange(ap1,desc(alt))
+ap3 <- slice(ap2,1:3)
+
+\end{verbatim}
+\end{framed}
+
+Some timezones do not have three airports. 
+If there are only two airports in a certain timezone, only those two will 
+be printed out.
+
+%-------------------------------------------------------------------%
