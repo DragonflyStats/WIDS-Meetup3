@@ -25,10 +25,8 @@ These verbs are useful, but they become really powerful when you combine them wi
 
 The verbs are affected by grouping as follows:
 \begin{itemize}
-	\item grouped \texttt{ select()} is the same ungrouped \texttt{ select()}, excepted that retains grouping variables are always retained. 
-	
-	\item 
-	grouped \texttt{  arrange()} orders first by grouping variables
+\item grouped \texttt{ select()} is the same ungrouped \texttt{ select()}, excepted that retains grouping variables are always retained. 
+\item grouped \texttt{  arrange()} orders first by grouping variables
 	
 	\item 
 	\texttt{ mutate()} and \texttt{ filter()} are most useful in conjunction with window functions (like \texttt{ rank()}, or \texttt{ min(x) == x), and are described in detail in vignette("window-function").
