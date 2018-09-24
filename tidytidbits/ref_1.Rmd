@@ -1,0 +1,75 @@
+Package‘tidytidbits’ August 24, 2018
+Type Package Title A Collection of Tools and Helpers Extending the Tidyverse Version 0.1.0 Author Marcel Wiesweg [aut, cre] Maintainer Marcel Wiesweg <marcel.wiesweg@uk-essen.de> Description A selection of various tools to extend a data analysis workﬂow based on the 'tidyverse' packages. This includes highleveldataframeeditingmethods(inthestyleof'mutate'/'mutate_at'),somemethodsinthestyleof 'purrr' and 'forcats', 'lookup' methods for dictlike lists, a generic method for lumping a data frame by a given count, various low-level methods for special treatment of 'NA' values, 'python'-style tupleassignment and 'truthy'/'falsy' checks, saving to PDF and PNG from a pipe and various small utilities. License GPL-3 Encoding UTF-8 LazyData true Imports utils, stats, grDevices, methods, dplyr, forcats, grid, purrr, stringr, tibble, tidyr, tidyselect, extrafont, rlang, magrittr Suggests survival RoxygenNote 6.0.1 NeedsCompilation no Repository CRAN Date/Publication 2018-08-24 15:50:07 UTC
+Rtopicsdocumented: add_prop_test . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 3 add_summary . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 4 add_summary_by . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 4 all_or_all_na . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 5
+1
+2 R topics documented:
+any_or_all_na . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 5 append_object . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 6 are_true . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 6 as_formatted_number . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 7 as_formatted_p_value . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 7 as_percentage_label . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 8 count_by . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 9 cross_tabulate . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 10 dina . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 10 equal_including_na . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 11 eval_unquoted . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 12 execute_if . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 13 execute_in_pipeline . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 14 expression_list . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 14 ﬁrst_non_nas . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 15 ﬁrst_not . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 16 ﬁrst_not_na . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 16 ﬁrst_which_not_na . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 17 format_numbers_at . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 17 format_p_values_at . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 18 identity_order . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 19 interlude . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 20 invalid . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 21 invert_value_and_names . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 21 local_variables . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 22 lookup . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 23 lookup_function_from_dict . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 24 lump . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 24 lump_rows . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 25 named_palette . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 26 orderer_function_from_sorted_vectors . . . . . . . . . . . . . . . . . . . . . . . . . . . 27 order_factor_by . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 27 pluck_vector . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 28 prepare_directory . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 28 prepare_path . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 29 prepend_object . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 29 print_deparsed . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 30 rename_factor . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 30 rename_reorder_factor . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 31 replace_sequential_duplicates . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 32 save_pdf . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 32 save_png . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 33 sequential_duplicates . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 33 str_locate_match . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 34 symbol_as_quosure . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 34 syntactically_safe . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 35 true_or_na . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 35 truthy . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 36
+add_prop_test 3
+tuple_assignment . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 36 which_non_na . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 37 with_name . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 38 with_value_containing . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 38
+Index 40
+add_prop_test Title
+Description Title
+Usage add_prop_test(.df, x, n, p = NULL, CI_lower_name = "CI_lower", CI_upper_name = "CI_upper", p_name = "p", alternative = c("two.sided", "less", "greater"), conf.level = 0.95, correct = TRUE)
+Arguments .df A data frame x The column/vector with the number of positive results n The column/vector/constant with the number of trials p Assumed proportion: Will add a p-value that the proportion is equal to p (default: 0.5) CI_lower_name, CI_upper_name, p_name Column names of the added columns alternative, conf.level, correct As for prop.test
+Value Data frame with columns added
+SeeAlso count_by()
+Examples
+library(magrittr) if (requireNamespace("survival", quietly = TRUE)) { survival::aml %>% count_by(x) %>% add_prop_test(n, sum(n), rel) }
+4 add_summary_by
+add_summary Add summary to tibble
+Description A verb for a dplyr pipeline: Performs a call to summarise(), but does not reduce the data frame to one row pergroup, instead, adds the resulting ﬁelds to every rowbelongingto thatgroup, returning the original frame with added/changed columns. Effectively, this is like calling summarise(), and then calling mutate() with all the resulting columns.
+Usage add_summary(.data, .language)
+Arguments .data Data argument, typical "ﬁrst" argument in dplyr verbs .language A call to summarise(), or another method performing equivalent aggregation (potentially wrapping summarise())
+Value The tibble with added columns
+add_summary_by Add summary to tibble
+Description A verb for a dplyr pipeline: Groups the frame by ... in addition to the current grouping, then calls add_summary, then returns the frame with the mutated summarising columns in the same grouping state as it was before this function was called.
+Usage add_summary_by(.data, .language, ...)
+Arguments .data Data argument, typical "ﬁrst" argument in dplyr verbs .language A call to summarise(), or another method performing equivalent aggregation (potentially wrapping summarise()) ... Parameters for group_by
+Value The tibble with added columns
+all_or_all_na 5
+all_or_all_na All() giving NA only if all values are NA
+Description All() giving NA only if all values are NA
+Usage
+all_or_all_na(...)
+Arguments ... Values
+Value NA if and only if all ... are NA, else all(...), ignoring NA values
+any_or_all_na Any() giving NA only if all values are NA
+Description Any() giving NA only if all values are NA
+Usage
+any_or_all_na(...)
+Arguments ... Values
+Value NA if and only if all ... are NA, else any(...), ignoring NA values
+6 are_true
+append_object Appending in a pipe, never unlisting
+Description Append to a given list, while considering as a single object and not unlisting as base::append does. Argument order is reversed compared to base::append to allow a different pattern of use in a pipe.
+Usage append_object(x, .l, name = NULL)
+Arguments x Objecttoappend. Iftheobjectisalist,thenitisappendedas-is,andnotunlisted. .l The list to append to. Special case handling applies if .l does not exist: then an empty list is used. This alleviates the need for an initial mylist <- list() name Will be used as name of the object in the list
+Value The list .l with x appended
+Examples
+library(magrittr) results <- list(first=c(3,4), second=list(5,6)) list(7,8) %>% append_object(results, "third result") -> results # results has length 1, containing one list named "first"
+are_true Vectorised conversion to logical, treating NA as False
+Description Vectorised conversion to logical, treating NA as False
+Usage are_true(x)
+Arguments x A vector
+as_formatted_number 7
+Value A logical vector of same size as x which is true where x is true (rlang::as_logical) and not NA
+as_formatted_number Format numeric value for output
+Description Vectorised conversion
+Usage
+as_formatted_number(x, decimal_places = 1, remove_trailing_zeroes = T)
+Arguments x Numeric vector decimal_places Decimal places to display remove_trailing_zeroes If the required decimal places are less than decimal places, should resulting trailing zeros be removed?
+Value Character vector
+Examples
+as_formatted_number(0.74167, 2) # gives "0.74"
+as_formatted_p_value Formatting p values
+Description Vectorised conversion
+Usage
+as_formatted_p_value(x, decimal_places = 3, prefix = "p", less_than_cutoff = 0.001, remove_trailing_zeroes = T, alpha = 0.05, ns_replacement = NULL)
+8 as_percentage_label
+Arguments x Numeric vector decimal_places Decimal places to display prefix Preﬁx to prepend (default "p=") less_than_cutoff Cut-offforsmallpvalues. Valuessmallerthanthiswillbedisplayedlike"p<..." remove_trailing_zeroes If the required decimal places are less than decimal places, should resulting trailing zeros be removed? alpha Cut-off for assuming signiﬁcance, usually 0.05 ns_replacement If p value is not signiﬁcant (is > alpha), it will be replace by this string (e.g. "n.s.") If NULL (default), no replacement is performed. Vectorised(inparallel)overx,preﬁx,less_than_cutoff,alphaandns_replacement.
+Value Character vector
+Examples
+as_formatted_p_value(0.02) # "p=0.02" as_formatted_p_value(0.00056) # "p<0.001"
+as_percentage_label Format as percentage for output
+Description Vectorised conversion
+Usage as_percentage
