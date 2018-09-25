@@ -1,0 +1,80 @@
+Functions in tidytidbits  
+Name 
+Description 
+lump_rows
+Lump rows of a tibble
+invalid
+A notion of valid and invalid
+with_name
+Slice by name
+first_not
+First argument that does not equal a given value
+named_palette
+Named color palette
+execute_if
+Conditional execution in a pipeline
+eval_unquoted
+Execute code after tidy evaluation
+are_true
+Vectorised conversion to logical, treating NA as False
+identity_order
+Ordering function: identity order
+which_non_na
+Get indices of non-NA values
+as_formatted_p_value
+Formatting p values
+symbol_as_quosure
+Make quosure from symbol
+invert_value_and_names
+Inverting name and value
+true_or_na
+Test for logical true or NA
+syntactically_safe
+Syntactically safe names
+truthy
+A python / javascript-like "truthy" notion
+as_formatted_number
+Format numeric value for output
+first_non_nas
+Row-wise first value which is not NA
+tuple_assignment: Infix operator for python-style tuple assignment
+interlude: An interlude in a magrittr pipeline
+add_summary: Add summary to tibble
+with_value_containing: Slice by value
+execute_in_pipeline: Executing language as if in a pipeline
+prepare_directory: Directory creation
+expression_list: Extract symbols from an expression of symbols and operators
+add_summary_by: Add summary to tibble
+prepare_path: Directory creation and file path concatenation
+as_percentage_label: Format as percentage for output
+dina: The DIN A paper formats
+pluck_vector: Pluck with simplified return value
+format_numbers_at: Format numeric columns for display
+all_or_all_na: All() giving NA only if all values are NA
+any_or_all_na: Any() giving NA only if all values are NA
+add_prop_test: Title
+local_variables: "Variable generating" functions
+print_deparsed: Print deparsed language
+first_not_na: First argument that is not NA
+sequential_duplicates: Detect sequential duplicates
+lookup: Lookup in a dictionary
+append_object: Appending in a pipe, never unlisting
+cross_tabulate: Create cross table from a tibble
+rename_factor: Rename a factor.
+save_png: Save plot as PNG
+lookup_function_from_dict: Creating a lookup function from dictionary
+equal_including_na: Compare vectors, treating NA like a value
+format_p_values_at: Format numeric columns for display
+rename_reorder_factor: Rename and reorder a factor.
+save_pdf: Save plot as PDF
+lump: Generic lumping: 
+replace_sequential_duplicates: Replace sequential duplicates
+prepend_object: Prepending in a pipe, never unlisting
+count_by: Count according to grouping
+order_factor_by: Reorder a factor
+first_which_not_na
+First which() is not na
+orderer_function_from_sorted_vectors
+Orderer function for complex sorting
+str_locate_match
+Combine str_match and str_locate
