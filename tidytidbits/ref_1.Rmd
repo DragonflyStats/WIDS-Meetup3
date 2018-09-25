@@ -29,47 +29,86 @@ Value The tibble with added columns
 all_or_all_na 5
 all_or_all_na All() giving NA only if all values are NA
 Description All() giving NA only if all values are NA
+
+####
 Usage
+<pre><code>
 all_or_all_na(...)
-Arguments ... Values
-Value NA if and only if all ... are NA, else all(...), ignoring NA values
-any_or_all_na Any() giving NA only if all values are NA
-Description Any() giving NA only if all values are NA
-Usage
+</code></pre>
+#### Arguments 
+* ... Values
+* *Value NA if and only if all ... are NA, else all(...), ignoring NA values
+
+## any_or_all_na Any() giving NA only if all values are NA
+
+#### Description Any() giving NA only if all values are NA
+
+#### Usage
 any_or_all_na(...)
 Arguments ... Values
 Value NA if and only if all ... are NA, else any(...), ignoring NA values
 6 are_true
-append_object Appending in a pipe, never unlisting
-Description Append to a given list, while considering as a single object and not unlisting as base::append does. Argument order is reversed compared to base::append to allow a different pattern of use in a pipe.
-Usage append_object(x, .l, name = NULL)
-Arguments x Objecttoappend. Iftheobjectisalist,thenitisappendedas-is,andnotunlisted. .l The list to append to. Special case handling applies if .l does not exist: then an empty list is used. This alleviates the need for an initial mylist <- list() name Will be used as name of the object in the list
-Value The list .l with x appended
-Examples
-library(magrittr) results <- list(first=c(3,4), second=list(5,6)) list(7,8) %>% append_object(results, "third result") -> results # results has length 1, containing one list named "first"
-are_true Vectorised conversion to logical, treating NA as False
-Description Vectorised conversion to logical, treating NA as False
+
+## append_object Appending in a pipe, never unlisting
+
+#### Description 
+Append to a given list, while considering as a single object and not unlisting as base::append does. Argument order is reversed compared to base::append to allow a different pattern of use in a pipe.
+
+#### Usage 
+append_object(x, .l, name = NULL)
+
+#### Arguments
+* x Objecttoappend. Iftheobjectisalist,thenitisappendedas-is,andnotunlisted. .l The list to append to. Special case handling applies if .l does not exist: then an empty list is used. This alleviates the need for an initial mylist <- list() name Will be used as name of the object in the list
+
+#### Value The list .l with x appended
+
+#### Examples
+library(magrittr) 
+results <- list(first=c(3,4), second=list(5,6)) list(7,8) %>% append_object(results, "third result") -> results 
+# results has length 1, containing one list named "first"
+
+## are_true Vectorised conversion to logical, treating NA as False
+
+#### Description Vectorised conversion to logical, treating NA as False
 Usage are_true(x)
 Arguments x A vector
 as_formatted_number 7
 Value A logical vector of same size as x which is true where x is true (rlang::as_logical) and not NA
 as_formatted_number Format numeric value for output
 Description Vectorised conversion
-Usage
+
+#### Usage
 as_formatted_number(x, decimal_places = 1, remove_trailing_zeroes = T)
-Arguments x Numeric vector decimal_places Decimal places to display remove_trailing_zeroes If the required decimal places are less than decimal places, should resulting trailing zeros be removed?
-Value Character vector
-Examples
+
+#### Arguments 
+x Numeric vector decimal_places Decimal places to display remove_trailing_zeroes If the required decimal places are less than decimal places, should resulting trailing zeros be removed?
+
+#### Value Character vector
+
+#### Examples
 as_formatted_number(0.74167, 2) # gives "0.74"
 as_formatted_p_value Formatting p values
 Description Vectorised conversion
 Usage
 as_formatted_p_value(x, decimal_places = 3, prefix = "p", less_than_cutoff = 0.001, remove_trailing_zeroes = T, alpha = 0.05, ns_replacement = NULL)
 8 as_percentage_label
-Arguments x Numeric vector decimal_places Decimal places to display prefix Preﬁx to prepend (default "p=") less_than_cutoff Cut-offforsmallpvalues. Valuessmallerthanthiswillbedisplayedlike"p<..." remove_trailing_zeroes If the required decimal places are less than decimal places, should resulting trailing zeros be removed? alpha Cut-off for assuming signiﬁcance, usually 0.05 ns_replacement If p value is not signiﬁcant (is > alpha), it will be replace by this string (e.g. "n.s.") If NULL (default), no replacement is performed. Vectorised(inparallel)overx,preﬁx,less_than_cutoff,alphaandns_replacement.
-Value Character vector
-Examples
-as_formatted_p_value(0.02) # "p=0.02" as_formatted_p_value(0.00056) # "p<0.001"
-as_percentage_label Format as percentage for output
-Description Vectorised conversion
+#### Arguments 
+* x Numeric vector 
+* decimal_places Decimal places to display prefix 
+* Preﬁx to prepend (default "p=") 
+* less_than_cutoff Cut-offforsmallpvalues. Valuessmallerthanthiswillbedisplayedlike"p<..." 
+* remove_trailing_zeroes If the required decimal places are less than decimal places, should resulting trailing zeros be removed? alpha Cut-off for assuming signiﬁcance, usually 0.05 
+* ns_replacement If p value is not signiﬁcant (is > alpha), it will be replace by this string (e.g. "n.s.") If NULL (default), no replacement is performed. Vectorised(inparallel)overx,preﬁx,less_than_cutoff,alphaandns_replacement.
+
+#### Value 
+Character vector
+
+#### Examples
+as_formatted_p_value(0.02) # "p=0.02" 
+
+as_formatted_p_value(0.00056) # "p<0.001"
+
+## as_percentage_label Format as percentage for output
+
+#### Description Vectorised conversion
 Usage as_percentage
