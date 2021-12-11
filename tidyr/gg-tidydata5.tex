@@ -1,0 +1,99 @@
+\documentclass[TIDYMASTER.tex]{subfiles} 
+\begin{document} 
+	
+%=============================================================================== %
+\begin{frame}[fragile]
+\frametitle{Tidy Data with \texttt{R}}
+\Large
+\vspace{-1cm}
+\noindent \textbf{\texttt{unite()}}
+\begin{itemize}
+\item 
+\texttt{unite()} does the opposite of \texttt{separate()}: it combines multiple columns into a single column.
+
+
+\item We can use \texttt{unite()} to rejoin the century and year columns that we created in the last example. 
+% That data is saved in the DSR package as table6.
+\end{itemize}
+
+
+\end{frame}
+%=============================================================================== %
+\begin{frame}[fragile]
+\frametitle{Tidy Data with \texttt{R}}
+\large
+\begin{framed}
+\begin{verbatim}
+table6
+
+## Source: local data frame [6 x 4]
+## 
+##       country century year              rate
+## 1 Afghanistan      19   99      745/19987071
+## 2 Afghanistan      20   00     2666/20595360
+## 3      Brazil      19   99   37737/172006362
+## 4      Brazil      20   00   80488/174504898
+## 5       China      19   99 212258/1272915272
+## 6       China      20   00 213766/1280428583
+\end{verbatim}
+\end{framed}
+
+\end{frame}
+%=============================================================================== %
+\begin{frame}[fragile]
+\frametitle{Tidy Data with \texttt{R}}{\large
+\begin{framed}
+\begin{verbatim}
+unite(table6, "new", century, year, sep = "")
+
+## Source: local data frame [6 x 3]
+## 
+##       country  new              rate
+## 1 Afghanistan 1999      745/19987071
+## 2 Afghanistan 2000     2666/20595360
+## 3      Brazil 1999   37737/172006362
+## 4      Brazil 2000   80488/174504898
+## 5       China 1999 212258/1272915272
+## 6       China 2000 213766/1280428583
+\end{verbatim}
+\end{framed}
+}
+
+\end{frame}
+%=============================================================================== %
+\begin{frame}[fragile]
+\frametitle{Tidy Data with \texttt{R}}
+\Large
+
+\begin{itemize}
+\item Give \texttt{unite()} the name of the data frame to reshape, the name of the new column to create (as a character string), and the names of the columns to unite. 
+\bigskip
+\item \texttt{unite()} will place an underscore (\_) between values from separate columns. 
+\end{itemize}
+
+\end{frame}
+%=============================================================================== %
+\begin{frame}[fragile]
+	\frametitle{Tidy Data with \texttt{R}}
+	\Large
+	
+	\begin{itemize}
+\item If you would like to use a different separator, or no separator at all, pass the separator as a character string to \texttt{sep}.
+\bigskip
+\item \texttt{unite()} returns a copy of the data frame that includes the new column, but not the columns used to build the new column.  \bigskip
+\item If you would like to retain these columns, add the argument \texttt{remove = FALSE}.
+\end{itemize}
+
+\end{frame}
+%=============================================================================== %
+%\begin{frame}[fragile]
+%\frametitle{Tidy Data with \texttt{R}}
+%\Large
+%\begin{itemize}
+%\item You can also use integers or the syntax of the dplyr::select to specify columns to unite in a more concise way. 
+%\item We’ll learn about select in Section 3.1.
+%\end{itemize}
+%
+%
+%\end{frame}
+\end{document}

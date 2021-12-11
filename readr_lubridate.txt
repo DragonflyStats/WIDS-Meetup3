@@ -1,0 +1,54 @@
+
+```{r}
+library(readr)
+
+library(here)
+
+library(dplyr)
+```
+
+#### `getwd()`
+
+
+#### `read_csv()`
+
+Make sure that the file ***CE.csv*** is locatable. We will call the dataframe GE1 to distinguish it from
+the result of a similar approach that we shall see shortly
+
+```{r}
+GE1 <- read_csv("data/GE.csv")
+
+```
+
+The ``read_csv()`` function is an enchancement on the base R command for importing CSV files: ``read.csv()`` (notice the difference in the names).
+
+
+```{r}
+GE2 <- read.csv("data/GE.csv")
+
+```
+
+Let's compare two imported data frames. What are the key differences?
+
+```{r}
+
+glimpse(GE1)
+
+glimpse(GE2)
+
+```
+
+#### `choose.files()`
+
+If you are having difficulty in locating your files, you can use the `choose.files()`. 
+You can search through your file directory to locate the CSV file.
+
+```{r}
+
+GE <- read_csv(choose.files())
+
+```
+
+```{r}
+
+```

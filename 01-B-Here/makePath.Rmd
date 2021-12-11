@@ -1,0 +1,16 @@
+
+makePath <- function(Exp1 =  getwd(), Exp2 = NULL, Exp3 = NULL, Exp4 = NULL,Exp5 = NULL, Exp6 = NULL){
+output <- paste(Exp1,Exp2,Exp3,Exp4,Exp5,Exp6,sep="/") 
+output <- gsub("/////","/",output)
+output <- gsub("////","/",output)
+output <- gsub("///","/",output)
+output <- gsub("//","/",output)
+return(output)
+}
+
+
+
+output <- gsub("//","/",output)
+output <- gsub("//","/",output)
+
+}

@@ -1,0 +1,29 @@
+
+#### Remark
+
+This name clash is expected to be resolved in a near-future version of R. 
+It is still worth knowing what to do in future, if a similar situation arises.
+
+```{r}
+library(MASS)
+library(dplyr)
+```
+
+These packages have a name space clash for the ``select()`` function.  This can cause errors if you need to use both
+R packages.
+
+```{r}
+iris %>% select(1:4) %>% head()
+library(MASS)
+iris %>% select(1:4) %>% head()
+```
+
+
+#### Detaching an R package.
+We can detach an R package from the R enviroment using the following command.
+
+```{r}
+detach(package:dplyr)
+```
+
+

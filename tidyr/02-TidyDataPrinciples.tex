@@ -1,0 +1,75 @@
+\documentclass[TIDYMASTER.tex]{subfiles} 
+\begin{document} 
+
+%You can learn more about the underlying principles in my tidy data paper. To see more examples of data tidying, read the vignette, vignette("tidy-data"), or check out the demos, demo(package = "tidyr"). Alternatively, check out some of the great stackoverflow answers that use tidyr. 
+
+%Keep up-to-date with development at http://github.com/hadley/tidyr, report bugs at http://github.com/hadley/tidyr/issues and get help with data manipulation challenges at https://groups.google.com/group/manipulatr. 
+
+%If you ask a question specifically about tidyr on stackoverflow, please tag it with tidyr and I’ll make sure to read it.
+
+\section{Tidy Data}
+%=====================================================%
+\begin{frame}
+	\frametitle{\texttt{tidyR} }
+	
+	The two most important properties of tidy data are:
+	\begin{itemize}
+		\item Each column is a variable.
+		\item Each row is an observation.
+	\end{itemize}
+\end{frame}
+%=============================================================================== %
+\begin{frame}[fragile]
+	\frametitle{Tidy Data with \texttt{R}}
+	\Large
+	Why should that be?
+	
+	R follows a set of conventions that makes one layout of tabular data much easier to work with than others. Your data will be easier to work with in R if it follows three rules
+	
+	\begin{itemize}
+		\item Each variable in the data set is placed in its own column
+		\item Each observation is placed in its own row
+		\item Each value is placed in its own cell
+		
+	\end{itemize}
+	Data that satisfies these rules is known as tidy data. %Notice that table1 is tidy data.
+\end{frame}
+%========================================= %
+\begin{frame}
+	\frametitle{Principles of Tidy Data}
+\begin{itemize}
+	\item 	Tidy data was popularized by Hadley Wickham, and it serves as the basis for many R packages and functions. 
+	\item You can learn more about tidy data by reading Tidy Data a paper written by Hadley Wickham and published in the Journal of Statistical Software. 
+	\item Tidy Data is available online at www.jstatsoft.org/v59/i10/paper.
+\end{itemize}
+\end{frame}
+%============================================ %
+\begin{frame}
+\frametitle{Principals of Tidy Data}
+\begin{itemize}
+\item Wickham’s idea leverages from ideas of relational databases and database normalization from computer science, although his audience is statisticians and data analysts. \item He starts off by defining terms, suggesting that talking about rows and columns is not rich enough:
+\end{itemize}
+
+\end{frame}
+%================================================= %
+\begin{frame}
+
+\begin{itemize}
+	\item The data is a collection of values of a given type
+	\item Every value belongs to a variable
+	\item Every variable belongs to an observation
+	\item Observations are variables for a unit (like an object or an event).
+\end{itemize}
+\end{frame}
+%================================================= %
+\begin{frame}
+
+\begin{itemize}
+\item Variables are columns, observations are rows and types of observations are tables. 
+\item Classically, Wickham relates this to third normal form from relational database theory. 
+\item He also describes types of variables as fixed and measured and suggests organizing fixed before measured in a table.
+\end{itemize}
+
+\end{frame}
+
+\end{document}

@@ -1,0 +1,57 @@
+
+dplyr
+
+
+* ``==`` Equal to 
+* ``!=`` Not Equal to 
+
+
+```{r}
+
+iris %>% filter(Species == "setosa") %>% dim()
+
+iris %>% filter(Species == "Setosa") %>% dim()
+
+iris %>% filter(Species != "Setosa") %>% dim()
+
+```
+
+* ``>`` Greater than
+* ``<`` Less than
+* ``>=`` Greater than or equal to 
+* ``<=`` Less than or equal to 
+
+```{r}
+
+iris %>% filter(Sepal.Length > 1.40) %>% dim() 
+
+iris %>% filter(Sepal.Length >= 1.45) %>% dim()
+```
+
+#### Using Relational Operators
+
+* ``&`` Logical AND
+* ``|`` Logical OR
+
+
+```{r}
+iris %>% filter(Sepal.Length > 1.5 & Sepal.Width >2.5) %>% dim()
+
+iris %>% filter(Species == "setosa" & Sepal.Width > 3) %>% dim()
+
+```
+
+#### Using some set theory 
+
+```{r}
+
+primes <- c(1,3,5,7,11,13,17,19,23,29,31,37)
+
+# is 5 in this set?
+
+5 %in% primes
+
+# in 10 in this set?
+10 %in% primes
+````
+

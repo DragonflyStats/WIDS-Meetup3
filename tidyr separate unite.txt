@@ -1,0 +1,31 @@
+TidyR : Joining and Separating Columns
+======================================
+
+#### Data Set
+
+```{r}
+
+# A dataframe containing locational data
+
+GeoDF <- data.frame(
+     Location1 <- c("Abbeylands","Baronstown","Tristernagh","Kilbixy","Cumminstown","Sherlock","Fore")
+     Location2 <- c("Ballynacargy","Rathowen","Ballivor","Ballynacargy","Abbeyshrule","Castepollard","Castlepollard")
+     Location3 <- c("Westmeath","Westmeath","Longford","Westmeath","Longford","Cavan","Cavan")
+     PostCode  <- c("WH-02","WH-02","LD-11","WH-12","LD-12","CN-05")
+     
+     )
+
+```
+
+#### `separate()`
+
+Let's separate the PostCode variable into two new variables: County and DistNum ( for District Number).
+```{r}
+
+```
+
+#### `unite()`
+
+```
+
+```

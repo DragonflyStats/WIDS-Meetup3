@@ -1,0 +1,189 @@
+\documentclass[TIDYMASTER.tex]{subfiles} 
+\begin{document} 
+	
+%=============================================================================== %
+\begin{frame}[fragile]
+\frametitle{Tidy Data with \texttt{R}}
+\Large
+%2.3 
+\vspace{-1cm}
+\noindent \texttt{separate()} and \texttt{unite()}
+\begin{itemize}
+\item \texttt{spread()} and \texttt{gather()} help you reshape the layout of your data to place variables in columns and observations in rows.  \bigskip
+\item \texttt{separate()} and \texttt{unite()} allow you split and combine cells to place a single, complete value in each cell.
+\end{itemize}
+
+
+\end{frame}
+%=============================================================================== %
+\begin{frame}[fragile]
+	\frametitle{Tidy Data with \texttt{R}}
+	\Large
+% 2.3.1 
+\noindent \texttt{ separate() }\\
+\begin{itemize}
+\item \texttt{separate()} turns a single character column into multiple columns by splitting the values of the column wherever a separator character appears.
+%
+%[SEPARATE DIAGRAM] 
+\item So, for example, we can use \texttt{separate()} to tidy table3, which combines values of cases and population in the same column.
+\end{itemize}
+\end{frame}
+%=============================================================================== %
+\begin{frame}[fragile]
+	\frametitle{Tidy Data with \texttt{R}}
+	\large
+	(\textbf{BEFORE)}
+	\begin{framed}
+		\begin{verbatim}
+		# Data set three
+		table3
+		
+		## Source: local data frame [6 x 3]
+		## 
+		##       country year              rate
+		## 1 Afghanistan 1999      745/19987071
+		## 2 Afghanistan 2000     2666/20595360
+		## 3      Brazil 1999   37737/172006362
+		## 4      Brazil 2000   80488/174504898
+		## 5       China 1999 212258/1272915272
+		## 6       China 2000 213766/1280428583
+		\end{verbatim}
+	\end{framed}
+\end{frame}
+%=============================================================================== %
+\begin{frame}[fragile]
+	\frametitle{Tidy Data with \texttt{R}}
+	\Large
+\begin{verbatim}
+separate(table3, rate, 
+    into = c("cases", "population"))
+
+## Source: local data frame [6 x 4]
+## 
+##       country year  cases population
+## 1 Afghanistan 1999    745   19987071
+## 2 Afghanistan 2000   2666   20595360
+## 3      Brazil 1999  37737  172006362
+## 4      Brazil 2000  80488  174504898
+## 5       China 1999 212258 1272915272
+## 6       China 2000 213766 1280428583
+\end{verbatim}
+\end{frame}
+%=============================================================================== %
+\begin{frame}[fragile]
+\frametitle{Tidy Data with \texttt{R}}
+\Large
+\begin{itemize}
+\item To use \texttt{separate()} pass separate the name of a data frame to reshape and the name of a column to separate. 
+\item Also give \texttt{separate()} an into argument, which should be a vector of character strings to use as new column names. 
+\item \texttt{separate()} will return a copy of the data frame with the column removed. 
+\item The previous values of the column will be split across several columns, one for each name in into.
+\end{itemize}
+
+\end{frame}
+%=============================================================================== %
+\begin{frame}[fragile]
+\frametitle{Tidy Data with \texttt{R}}
+\Large
+\vspace{-0.4cm}
+\noindent \textbf{Where to Separate?}
+\begin{itemize}
+\item By default, \texttt{separate()} will split values wherever a non-alphanumeric character appears.
+\item Non-alphanumeric characters are characters that are neither a number nor a letter. 
+\item For example, in the code above, \texttt{separate()} split the values of rate at the forward slash characters.
+\end{itemize}
+
+\end{frame}
+%=============================================================================== %
+\begin{frame}[fragile]
+	\frametitle{Tidy Data with \texttt{R}}
+	\Large
+\noindent \textbf{Specifying a Character} \\
+If you wish to use a specific character to separate a column, you can pass the character to the sep argument of \texttt{separate()}. 
+%For example, we could rewrite the code above as
+
+\begin{framed}
+\begin{verbatim}
+separate(table3, rate, 
+    into = c("cases", "population"), 
+    sep = "/")
+\end{verbatim}
+\end{framed}
+% % See Appendix E to learn more about regular expressions in R.
+\end{frame}
+%=============================================================================== %
+\begin{frame}[fragile]
+\frametitle{Tidy Data with \texttt{R}}
+\Large
+\noindent \textbf{Multiple Separation}
+
+\begin{itemize}
+\item You can also pass an integer or vector of integers to \texttt{sep}. \texttt{separate()} will interpret the integers as positions to split at.
+
+\item  Positive values start at 1 at the far-left of the strings; \item negative value start at -1 at the far-right of the strings. 
+		
+		\item The length of \texttt{sep} should be one less than the number of names in into. 
+\end{itemize}
+\end{frame}
+%=============================================================================== %
+\begin{frame}[fragile]
+	\frametitle{Tidy Data with \texttt{R}}
+	\Large
+
+	\begin{itemize}
+		
+
+\item \textbf{Example:} You can use this arrangement to separate the last two digits of each year.
+\end{itemize}
+
+\end{frame}
+%=============================================================================== %
+\begin{frame}[fragile]
+\frametitle{Tidy Data with \texttt{R}}
+\large
+\textbf{(Mid Columns : year into century and year)}
+\begin{verbatim}
+separate(table3, year, 
+   into = c("century", "year"), sep = 2)
+
+## Source: local data frame [6 x 4]
+## 
+##       country century year              rate
+## 1 Afghanistan      19   99      745/19987071
+## 2 Afghanistan      20   00     2666/20595360
+## 3      Brazil      19   99   37737/172006362
+## 4      Brazil      20   00   80488/174504898
+## 5       China      19   99 212258/1272915272
+## 6       China      20   00 213766/1280428583
+\end{verbatim}
+
+
+\end{frame}
+%=============================================================================== %
+%\begin{frame}[fragile]
+%\frametitle{Tidy Data with \texttt{R}}
+%\Large
+%You can futher customize separate() with the remove, convert, and extra arguments:
+%\begin{description}
+%\item[remove] - Set \texttt{remove = FALSE} to retain the column of values that were separated in the final data frame.
+%\item[convert] - By default, \texttt{separate()} will return new columns as character columns. Set convert = TRUE to convert new columns to double (numeric), integer, logical, complex, and factor columns with \texttt{type.convert().}
+%\end{description}
+%
+%\end{frame}
+%=============================================================================== %
+%\begin{frame}[fragile]
+%	\frametitle{Tidy Data with \texttt{R}}
+%	\Large
+%\texttt{extra} 
+%\begin{itemize}
+%
+%
+%\item extra controls what happens when the number of new values in a cell does not match the number of new columns in into.
+%\item If extra = error (the default), separate() to return an error. 
+%\item If extra = drop, separate() will drop new values and supply NAs as necessary to fill the new columns. 
+%\item If extra = merge, separate() will split at most length(into) times.
+%\end{itemize}
+%
+%\end{frame}
+
+\end{document}

@@ -1,0 +1,20 @@
+
+The Venue is Dooradoyle Library. The workshop will begin at 10.30 am. 
+
+### Wifi
+
+* Wifi sccess is available to Limerick Library residents only. 
+* There is open access at the Costa coffee shop inside the shopping centre door. 
+
+
+### Workshop Material
+Markdown files can be opened in RStudio or notepad editors. 
+
+### Charging for the event
+There is no charge for the event. 
+
+### Catering
+There is no teas coffees or catering. 
+Please respect the Library's rules against vonsupteof food and drnk ontheir pre. Ises
+
+### Code of conduct 

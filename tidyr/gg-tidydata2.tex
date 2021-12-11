@@ -1,0 +1,254 @@
+\documentclass[TIDYMASTER.tex]{subfiles} 
+\begin{document} 
+%=============================================================================== %
+%\begin{frame}[fragile]
+%	\frametitle{Tidy Data with \texttt{R}}
+%	\Large
+%The next sections will show you how to transform untidy data sets into tidy data sets.
+%
+%
+%\end{frame}
+%=============================================================================== %
+\begin{frame}[fragile]
+\frametitle{Tidy Data with \texttt{R}}
+\Large
+% %2.2 spread() and gather()
+\begin{itemize}
+\item The \textbf{tidyr} package by Hadley Wickham is designed to help you tidy your data.
+\item \textbf{tidyr} contains four functions that alter the layout of tabular data sets, while preserving the values and relationships contained in the data sets.
+\item The two most important functions in tidyr are \texttt{gather()} and \texttt{spread()}. 
+\item Each relies on the idea of a key value pair.
+\end{itemize}
+
+\end{frame}
+%=============================================================================== %
+\begin{frame}[fragile]
+\frametitle{Tidy Data with \texttt{R}}
+\Large
+% %2.2.1 key value pairs
+\begin{itemize}
+\item A key value pair is a simple way to record information. 
+\item A pair contains two parts: a \textbf{key} that explains what the information describes, and a \textbf{value} that contains the actual information. 
+%\item So for example,
+\begin{framed}
+\begin{verbatim}
+Password: 0123456789 
+\end{verbatim}
+\end{framed}
+%would be a key value pair.
+\item \textit{0123456789} is the \textbf{value}, and it is associated with the \textbf{key} \textit{Password}.
+\end{itemize}
+
+\end{frame}
+%=============================================================================== %
+\begin{frame}[fragile]
+	\frametitle{Tidy Data with \texttt{R}}
+	\Large
+\begin{itemize}
+%\item Data values form natural key value pairs. 
+%
+%\item The value is the value of the pair and the variable that the value describes is the key. 
+
+\item You could decompose table1 into a group of key value pairs, but it would cease to be a useful data set because you no longer know which values belong to the same observation (next slides).
+\item In tidy data, each cell will contain a value and each column name will contain a key, but this doesn’t need to be the case for untidy data.
+\end{itemize}
+\end{frame}
+%=============================================================================== %
+\begin{frame}[fragile]
+	\frametitle{Tidy Data with \texttt{R}}
+	\Large
+\begin{verbatim}
+Country: Afghanistan
+Country: Brazil
+Country: China
+Year: 1999
+Year: 2000
+Year: 2001
+\end{verbatim}
+\end{frame}
+%=============================================================================== %
+\begin{frame}[fragile]
+	\frametitle{Tidy Data with \texttt{R}}
+	\Large
+\begin{verbatim}
+Population:   19987071
+Population:   20595360
+Population:  172006362
+Population:  174504898
+Population: 1272915272
+Population: 1280428583
+Cases:    745
+Cases:   2666
+Cases:  37737
+Cases:  80488
+Cases: 212258
+Cases: 213766
+\end{verbatim}	
+
+\end{frame}
+%=============================================================================== %
+%\begin{frame}[fragile]
+%	\frametitle{Tidy Data with \texttt{R}}
+%	\Large
+%\begin{itemize}
+%\item Every cell in a table of data contains one half of a key value pair, as does every column name. 
+%
+%% Consider table2.
+%\end{itemize}
+%
+%
+%%table2
+%\end{frame}
+%=============================================================================== %
+\begin{frame}[fragile]
+	\frametitle{Tidy Data with \texttt{R}}
+\begin{verbatim}
+## Source: local data frame [12 x 4]
+## 
+##        country year        key      value
+## 1  Afghanistan 1999      cases        745
+## 2  Afghanistan 1999 population   19987071
+## 3  Afghanistan 2000      cases       2666
+## 4  Afghanistan 2000 population   20595360
+## 5       Brazil 1999      cases      37737
+## 6       Brazil 1999 population  172006362
+## 7       Brazil 2000      cases      80488
+## 8       Brazil 2000 population  174504898
+## 9        China 1999      cases     212258
+## 10       China 1999 population 1272915272
+## 11       China 2000      cases     213766
+## 12       China 2000 population 1280428583
+\end{verbatim}
+\end{frame}
+%=============================================================================== %
+\begin{frame}[fragile]
+	\frametitle{Tidy Data with \texttt{R}}
+	\Large
+\textbf{spead()}
+\begin{itemize}
+\item	In table2, the key column contains only keys (and not just because the column is labelled key). 
+\item Conveniently, the value column contains the values associated with those keys.
+\item You can use the \texttt{spread()} function to tidy this layout.
+\end{itemize}
+
+\end{frame}
+%=============================================================================== %
+\begin{frame}[fragile]
+\frametitle{Tidy Data with \texttt{R}}
+\Large
+% 2.2.2 spread()
+\texttt{spread()}
+\begin{itemize}
+\item \texttt{spread()} turns a pair of key:value columns into a set of tidy columns. 
+\item To use \texttt{spread()}, pass it the name of a data frame, then the name of the key column in the data frame, and then the name of the value column. 
+\item Pass the column names as they are; do not use quotes.
+\item To tidy table2, you would pass \texttt{spread()} the key column and then the value column.
+\end{itemize}
+\end{frame}
+%=============================================================================== %
+\begin{frame}[fragile]
+	\frametitle{Tidy Data with \texttt{R}}
+	\large
+%table2
+\begin{verbatim}
+## Source: local data frame [12 x 4]
+## 
+##        country year        key      value
+## 1  Afghanistan 1999      cases        745
+## 2  Afghanistan 1999 population   19987071
+## 3  Afghanistan 2000      cases       2666
+## 4  Afghanistan 2000 population   20595360
+.....
+\end{verbatim}
+\end{frame}
+%=============================================================================== %
+\begin{frame}[fragile]
+	\frametitle{Tidy Data with \texttt{R}}
+	\large
+\begin{verbatim}
+library(tidyr)
+spread(table2, key, value)
+
+## Source: local data frame [6 x 4]
+## 
+##       country year  cases population
+## 1 Afghanistan 1999    745   19987071
+## 2 Afghanistan 2000   2666   20595360
+## 3      Brazil 1999  37737  172006362
+## 4      Brazil 2000  80488  174504898
+## 5       China 1999 212258 1272915272
+## 6       China 2000 213766 1280428583
+\end{verbatim}
+\end{frame}
+%=============================================================================== %
+\begin{frame}[fragile]
+	\frametitle{Tidy Data with \texttt{R}}
+	\Large
+\begin{itemize}
+\item \texttt{spread()} returns a copy of your data set that has had the \textbf{key} and \textbf{value} columns removed. 
+\item In their place, \texttt{spread()} adds a new column for each unique value of the key column (i.e. new columns: cases and populations).
+\item These unique values will form the column names of the new columns. 
+\item \texttt{spread()} distributes the cells of the former value column across the cells of the new columns and truncates any non-key, non-value columns in a way that prevents duplication.
+\end{itemize}
+
+
+\end{frame}
+%=============================================================================== %
+\begin{frame}[fragile]
+\frametitle{Tidy Data with \texttt{R}}
+\Large
+\begin{itemize}
+\item \texttt{spread()} distributes a pair of key:value columns into a field of cells. The unique values of the key column become the column names of the field of cells.
+
+\item You can see that \texttt{spread()} maintains each of the relationships expressed in the original data set. The output contains the four original variables, country, year, population, and cases.
+
+\item And the values of these variables are grouped according to the orginal observations, but now the layout of these relationships is tidy.
+\end{itemize}
+
+\end{frame}
+%=============================================================================== %
+\begin{frame}[fragile]
+	\frametitle{Tidy Data with \texttt{R}}
+	\Large
+\texttt{spread()} takes three optional arguments in addition to data, key, and value:
+\begin{itemize}
+	\item \texttt{fill}
+	\item \texttt{convert}
+	\item \texttt{drop}
+\end{itemize}
+\end{frame}
+%=============================================================================== %
+\begin{frame}[fragile]
+	\frametitle{Tidy Data with \texttt{R}}
+	\Large
+\texttt{fill}
+\begin{itemize}
+	\item  If the tidy structure creates combinations of variables that do not exist in the original data set, \texttt{spread()} will place an \texttt{NA} in the resulting cells.
+	\item (\texttt{NA} is \texttt{R}’s missing value symbol). 
+	\item You can change this behaviour by passing \texttt{fill} an alternative value to use.
+\end{itemize}
+\end{frame}
+%=============================================================================== %
+\begin{frame}[fragile]
+	\frametitle{Tidy Data with \texttt{R}}
+	\Large
+\texttt{convert}
+\begin{itemize}
+	\item If a value column contains multiple types of data, its elements will be saved as a single type, usually character strings. 
+	\item As a result, the new columns created by \texttt{spread()} will also contain character strings.
+	\item  If you set \texttt{convert = TRUE}, \texttt{spread()} will run \texttt{type.convert()} on each new column, which will convert strings to \textit{doubles (numerics)}, \textit{integers}, \textit{logicals}, \textit{complexes}, or \textit{factors}.
+	\end{itemize}
+\end{frame}
+%=============================================================================== %
+\begin{frame}[fragile]
+	\frametitle{Tidy Data with \texttt{R}}
+	\Large
+\vspace{-1cm}
+	\texttt{drop} 
+\begin{itemize}
+\item The \texttt{drop} argument controls how \texttt{spread()} handles factors in the key column. 
+\item If you set \texttt{drop = FALSE}, spread will keep factor levels that do not appear in the key column, filling in the missing combinations with the value of fill.
+\end{itemize}
+\end{frame}
+
+\end{document}

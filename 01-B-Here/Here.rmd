@@ -1,0 +1,24 @@
+here: A Simpler Way to Find Your Files
+==========================================
+* Constructs paths to your project's files. 
+* The '``here()``' function uses a reasonable heuristics to find your project's files, based on the current working directory at the time when the package is loaded.
+* Use it as a drop-in replacement for '``file.path()``', it will always locate the files relative to your project root.
+
+```{r}
+install.packages(here)
+library(here)
+```
+
+Actual demonstration of here::here()
+I will let this code run.
+What does here think the top-level of current project is? The package displays this on load or, at any time, you can just call here().
+library(here)
+#> here() starts at /Users/jenny/rrr/here_here
+here()
+#> [1] "/Users/jenny/rrr/here_here"
+Build a path to something in a subdirectory and use it.
+here("one", "two", "awesome.txt")
+#> [1] "/Users/jenny/rrr/here_here/one/two/awesome.txt"
+cat(readLines(here("one", "two", "awesome.txt")))
+#> OMG this is so awesome!
+Don’t try this at home, folks! But let me set working directory to a subdirectory and prove to you that the same code as above, for getting the path to awesome.txt, still works.

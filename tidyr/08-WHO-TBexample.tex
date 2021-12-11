@@ -1,0 +1,152 @@
+\documentclass[TIDYMASTER.tex]{subfiles} 
+\begin{document} 
+%=============================================================================== %
+\begin{frame}
+	\frametitle{Tidy Data with \texttt{R}}
+	\Large
+	Section 2.4 concludes the chapter, combining everything you’ve learned about tidyr to tidy a real data set on tuberculosis epidemiology collected by the World Health Organization.
+\end{frame}
+%======================================== %
+\begin{frame}
+	
+
+Tidy Data
+Way of storing data that makes rest of analyses are easier
+WHO - World Health Organization Data
+- country (iso2)
+- gender
+- year
+- age
+- number of cases 
+
+	
+\end{frame}
+%==================================== %
+\begin{frame}[fragile]
+\frametitle{WHO - TB example}
+\begin{itemize}
+\item The who data set in the DSR package contains cases of tuberculosis (TB) reported between 1995 and 2013 sorted by country, age, and gender. 
+\item The data comes in the 2014 World Health Organization Global Tuberculosis Report, available for download at \begin{verbatim}
+www.who.int/tb/country/data/download/en/
+\end{verbatim} 
+\item The data provides a wealth of epidemiological information, but it would be difficult to work with the data as it is.
+\end{itemize}	
+
+
+\end{frame}
+%=============================================================================== %
+\begin{frame}[fragile]
+\frametitle{Tidy Data with \texttt{R}}
+\Large
+To see the data in its raw form, load DSR with library(DSR) then run
+
+View(who)
+
+A subset of the who data frame displayed with View().
+
+who provides a realistic example of tabular data in the wild. It contains redundant columns, odd variable codes, and many missing values. In short, who is messy.
+\end{frame}
+%=============================================================================== %
+\begin{frame}[fragile]
+	\frametitle{Tidy Data with \texttt{R}}
+	\Large
+TIP
+
+The View() function opens a data viewer in the RStudio IDE. Here you can examine the data set, search for values, and filter the display based on logical conditions. Notice that the View() function begins with a capital V.
+\end{frame}
+%=============================================================================== %
+\begin{frame}[fragile]
+\frametitle{Tidy Data with \texttt{R}}
+\Large
+The most unique feature of who is its coding system. Columns five through sixty encode four separate pieces of information in their column names:
+
+The first three letters of each column denote whether the column contains new or old cases of TB. In this data set, each column contains new cases.
+\end{frame}
+%=============================================================================== %
+\begin{frame}[fragile]
+\frametitle{Tidy Data with \texttt{R}}
+\Large
+The next two letters describe the type of case being counted. We will treat each of these as a separate variable.
+\begin{description}
+\item[rel] stands for cases of relapse
+\item[ep] stands for cases of extrapulmonary TB
+\item[sn] stands for cases of pulmonary TB that could not be diagnosed by a pulmonary smear (smear negative)
+\item[sp] stands for cases of pulmonary TB that could be diagnosed be a pulmonary smear (smear positive)
+\item The sixth letter describes the sex of TB patients. The data set groups cases by males (m) and females (f).
+\end{description}
+
+
+\end{frame}
+%=============================================================================== %
+\begin{frame}[fragile]
+\frametitle{Tidy Data with \texttt{R}}
+\Large
+The remaining numbers describe the age group of TB patients. The data set groups cases into seven age groups:
+\begin{itemize}
+\item 014 stands for patients that are 0 to 14 years old
+\item 1524 stands for patients that are 15 to 24 years old
+\item 2534 stands for patients that are 25 to 34 years old
+\item 3544 stands for patients that are 35 to 44 years old
+\item 4554 stands for patients that are 45 to 54 years old
+\item 5564 stands for patients that are 55 to 64 years old
+\item 65 stands for patients that are 65 years old or older
+\end{itemize}
+
+\end{frame}
+%=============================================================================== %
+\begin{frame}[fragile]
+\frametitle{Tidy Data with \texttt{R}}
+\Large
+\begin{itemize}
+\item Notice that the who data set is untidy in multiple ways.
+\item  First, the data appears to contain values in its column names. 
+\item We can move the values into their own column with gather(). 
+\item This will make it easy to separate the values combined in each code.
+\end{itemize}
+
+
+\begin{verbatim}
+who <- gather(who, "code", "value", 5:60)
+\end{verbatim}
+
+
+\end{frame}
+%=============================================================================== %
+\begin{frame}[fragile]
+\frametitle{Tidy Data with \texttt{R}}
+\Large
+\begin{itemize}
+\item We can separate the values in each code with two passes of \texttt{separate()}. 
+\item The first pass will split the codes at each underscore.
+
+\begin{verbatim}
+who <- separate(who, code, c("new", "var", "sexage"))
+\end{verbatim}
+\item The second pass will split sexage after the first character to create a sex column and an age column.
+
+\begin{verbatim}
+who <- separate(who, sexage, c("sex", "age"), sep = 1)
+\end{verbatim}
+\end{itemize}
+
+
+
+\end{frame}
+%=============================================================================== %
+\begin{frame}[fragile]
+\frametitle{Tidy Data with \texttt{R}}
+\Large
+\begin{itemize}
+\item Finally, we can move the rel, ep, sn, and sp keys into their own column names with spread().
+
+\begin{verbatim}
+who <- spread(who, var, value)
+\end{verbatim}
+\item The who data set is now tidy. It is far from sparkling (for example, it contains several redundant columns), but it will now be much easier to work with in R. 
+\item We will continue to work with this tidy version of who in Section 3.7, where we will remove the redundant columns and calculate new variables.
+
+\end{itemize}
+
+\end{frame}
+\end{document}
+

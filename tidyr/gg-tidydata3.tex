@@ -1,0 +1,169 @@
+\documentclass[TIDYMASTER.tex]{subfiles} 
+\begin{document} 
+	
+%=============================================================================== %
+\begin{frame}[fragile]
+	\frametitle{Tidy Data with \texttt{R}}
+	\Large
+% %2.2.3 
+\texttt{gather()}
+\begin{itemize}
+\item \texttt{gather()} does the reverse of \texttt{spread()}. 
+\item \texttt{gather()} collects a set of column names and places them into a single “key” column. 
+\item It also collects the cells of those columns and places them into a single value column.
+\item You can use \texttt{gather()} to tidy table4.
+\end{itemize}
+
+\end{frame}
+%=============================================================================== %
+\begin{frame}[fragile]
+	\frametitle{Tidy Data with \texttt{R}}
+	\Large
+\begin{verbatim}
+table4  # cases
+
+## Source: local data frame [3 x 3]
+## 
+##       country   1999   2000
+## 1 Afghanistan    745   2666
+## 2      Brazil  37737  80488
+## 3       China 212258 213766
+\end{verbatim}
+\end{frame}
+%=============================================================================== %
+\begin{frame}[fragile]
+	\frametitle{Tidy Data with \texttt{R}}
+	\Large
+\begin{itemize}
+\item To use \texttt{gather()}, pass it the name of a data frame to reshape. 
+\item Then pass \texttt{gather()} a character string to use for the name of the “key” column that it will make, as well as a character string to use as the name of the value column that it will make. 
+\item Finally, specify which columns \texttt{gather()} should collapse into the key value pair (here with integer notation).
+\end{itemize}
+
+\end{frame}
+%=============================================================================== %
+\begin{frame}[fragile]
+	\frametitle{Tidy Data with \texttt{R}}
+	\Large
+\begin{verbatim}
+gather(table4, "year", "cases", 2:3)
+
+## Source: local data frame [6 x 3]
+## 
+##       country year  cases
+## 1 Afghanistan 1999    745
+## 2      Brazil 1999  37737
+## 3       China 1999 212258
+## 4 Afghanistan 2000   2666
+## 5      Brazil 2000  80488
+## 6       China 2000 2137664
+\end{verbatim}
+
+\end{frame}
+%=============================================================================== %
+\begin{frame}[fragile]
+	\frametitle{Tidy Data with \texttt{R}}
+	\Large
+\begin{itemize}
+\item \texttt{gather()} returns a copy of the data frame with the specified columns removed. 
+\item To this data frame, \texttt{gather()} has added two new columns: a “key” column that contains the former column names of the removed columns, and a value column that contains the former values of the removed columns. 
+
+
+\end{itemize}
+
+\end{frame}
+%=============================================================================== %
+\begin{frame}[fragile]
+	\frametitle{Tidy Data with \texttt{R}}
+	\Large
+\begin{itemize}
+\item \texttt{gather()} repeats each of the former column names (as well as each of the original columns) to maintain each combination of values that appeared in the original data set. 
+\item \texttt{gather()} uses the first string that you supplied as the name of the new “key” column, and it uses the second string as the name of the new value column.
+\end{itemize}
+
+\end{frame}
+%=============================================================================== %
+%\begin{frame}[fragile]
+%	\frametitle{Tidy Data with \texttt{R}}
+%	\Large
+%I’ve placed “key” in quotation marks because you will usually use gather() to create tidy data. In this case, the “key” column will contain values, not keys. The values will only be keys in the sense that they were formally in the column names, a place where keys belong.
+%
+%\end{frame}
+%=============================================================================== %
+\begin{frame}
+\frametitle{Tidy Data with \texttt{R}}
+\Large
+\begin{itemize}
+\item Just like \texttt{spread()}, gather maintains each of the relationships in the original data set. 
+% \item This time table3 only contained three variables, country, year and cases.
+% \item Each of these appears in the output of \texttt{gather()} in a tidy fashion.
+
+\item \texttt{gather()} also maintains each of the observations in the original data set, organizing them in a tidy fashion.
+
+% \item We can use gather() to tidy table4 in a similar fashion.
+\end{itemize}
+
+\end{frame}
+%=============================================================================== %
+\begin{frame}[fragile]
+\frametitle{Tidy Data with \texttt{R}}
+\Large
+\begin{verbatim}
+table5  # population
+
+## Source: local data frame [3 x 3]
+## 
+##       country       1999       2000
+## 1 Afghanistan   19987071   20595360
+## 2      Brazil  172006362  174504898
+## 3       China 1272915272 1280428583
+\end{verbatim}
+\end{frame}
+%=============================================================================== %
+\begin{frame}[fragile]
+	\frametitle{Tidy Data with \texttt{R}}
+	\Large
+	\begin{verbatim}
+gather(table5, "year", "population", 2:3)
+
+## Source: local data frame [6 x 3]
+## 
+##       country year population
+## 1 Afghanistan 1999   19987071
+## 2      Brazil 1999  172006362
+## 3       China 1999 1272915272
+## 4 Afghanistan 2000   20595360
+## 5      Brazil 2000  174504898
+## 6       China 2000 1280428583
+\end{verbatim}
+\end{frame}
+%=============================================================================== %
+\begin{frame}[fragile]
+\frametitle{Tidy Data with \texttt{R}}
+\Large
+\begin{itemize}
+\item Here we identified the columns to collapse with a series of integers. 2:3 describes the second and third columns of the data frame. 
+\item You can identify the same columns with each of the commands below.
+
+\item You can also identify columns by name with the notation introduced by the select function in dplyr
+\end{itemize}
+
+\begin{framed}
+\begin{verbatim}
+gather(table5, "year", "population", c(2, 3))
+gather(table5, "year", "population", -1)
+\end{verbatim}
+\end{framed}
+\end{frame}
+%=============================================================================== %
+%\begin{frame}[fragile]
+%	\frametitle{Tidy Data with \texttt{R}}
+%	\Large
+%\begin{itemize}
+%\item You can also identify columns by name with the notation introduced by the select function in dplyr, see Section 3.1.
+%
+%\item In Section 3.6, you will learn how to combine two data frames, like the tidy versions of table4 and table5 into a single data frame.
+%\end{itemize}
+%
+%\end{frame}
+\end{document}
