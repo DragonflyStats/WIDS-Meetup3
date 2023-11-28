@@ -1,9 +1,0 @@
-n <-  1000
-
-prob <- (sample(c(10:15,8))/100) %>% sort()
-
-Animals <- sample( c("Dog","Cat","Horse","Mouse","Duck","Goose","Chicken","Goat"), n , replace = TRUE, prob = prob)
-
-School <- sample( c("Slytherin","Hufflepuff","Griffendor","Ravenclaw","Shufflepluff") )
-
-Children <- sample( c("none","one","two","three","four or more") , n, replace=FALSE, prob=c(0.15,0.25,0.35,0.15,0.10) )
